@@ -15,6 +15,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # For Django Channels
+    'daphne',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -24,6 +27,7 @@ INSTALLED_APPS = [
     'api',
     # Django Rest Freamework
     'rest_framework',
+
 
 ]
 
@@ -55,7 +59,18 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'bindu_server.wsgi.application'
+#WSGI_APPLICATION = 'bindu_server.wsgi.application'
+
+ASGI_APPLICATION = 'bindu_server.asgi.application'
+# Channel Layer
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
+}
 
 # Database
 
